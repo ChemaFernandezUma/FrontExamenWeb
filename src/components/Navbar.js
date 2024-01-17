@@ -5,6 +5,8 @@ import axios from 'axios';
 
 const Navbar = () => {
 
+    const [saldo, setSaldo] = React.useState(0);
+
     async function handleCallbackResponse(response) {
         var userObject = jwtDecode(response.credential);
         localStorage.setItem("token", response.credential);
@@ -44,6 +46,22 @@ const Navbar = () => {
         }
     }, [handleCallbackResponse])
 
+    useEffect(() => {
+        const getSaldo = async () => {
+            var url = "http://localhost:5001/gastos/saldo/" + localStorage.getItem("email");
+            var respuesta = await axios.get(url).then(res => {
+                console.log(res.data);
+                setSaldo(res.data);
+            }
+            ).catch(err => {
+                console.log(err);
+            })
+
+        }
+        getSaldo();
+    }, [])
+
+
     return (
         <nav className=''>
             <div className="navbar navbar-expand-lg navbar-light bg-light">
@@ -55,9 +73,9 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav col-md-12">
                             <a className="nav-link active" aria-current="page" href="/">Inicio</a>
-                            {/* <a className="nav-link active" aria-current="page" href="/crearEvento">Crear evento</a>
-                            <a className="nav-link active" aria-current="page" href="/logs">Logs inicio de sesion</a> */}
+                            <a className="nav-link active" aria-current="page" href="/crearPago">Crear pago</a>
                             {localStorage.getItem("cargado") ? <><a className='nombreInicioSesion ponerDerecha '>Bienvenido {localStorage.getItem("name")}</a>
+                                <a className='nombreInicioSesion saldo'>Saldo : {saldo>0 ? <a className='saldoPos'>{saldo}</a> : <a className='saldoNeg'>{saldo}</a>}</a>
                                 <button className='btn btn-danger' onClick={() => {
                                     localStorage.clear();
                                     window.location.href = "http://localhost:3000";

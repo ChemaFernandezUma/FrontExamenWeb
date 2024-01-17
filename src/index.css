@@ -35,3 +35,25 @@
     text-align: center;
     margin-top: 1rem;
 }
+
+.saldo{
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    
+}
+
+.saldoPos{
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: rgb(0, 255, 0);
+}
+
+.saldoNeg{
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: none;
+    color: rgb(255, 0, 0);
+}
