@@ -57,3 +57,9 @@
     text-decoration: none;
     color: rgb(255, 0, 0);
 }
+
+.fotoPuque{
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+}

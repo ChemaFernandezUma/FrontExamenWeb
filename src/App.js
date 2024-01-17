@@ -24,7 +24,7 @@ function App() {
   const [coordenadas, setCoordenadas] = useState([36.719091, -4.416206]);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/gastos/')
+    axios.get('http://localhost:5001/gastos/gasto/desc')
       .then(res => {
         setData(res.data);
         const markers = res.data.map((parada) => (
@@ -64,9 +64,8 @@ function App() {
             <p>Lat : {item.lat}</p>
             <p>Lon : {item.lon}</p>
             <p> Lugar: {item.lugar}</p>
+            {item.imagenes ? <img src={item.imagenes} alt="" className="fotoPuque"/> : null}
             {item.email === localStorage.getItem('email') ? <button className="btn btn-danger" onClick={eliminarItem(item._id)}>Eliminar</button> : null}
-
-            {item.imagenes ? <img src={item.imagenes[0]} alt="" /> : null}
           </div>
         )
 

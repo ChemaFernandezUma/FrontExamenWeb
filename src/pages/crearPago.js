@@ -23,15 +23,14 @@ const CrearPago = () => {
 
         
 
-         const cloudinaryUploadPromises = Array.from(imagenes).map((imagen) => {
+         
              const formData = new FormData();
-            formData.append('imagen', imagen);
-
+            formData.append('imagen', imagenes[0]);
+            const cloudinaryUploadPromises =
              // Devolvemos la promesa de la subida de la imagen
-             return axios.post('http://localhost:5001/subir', formData)
-                 .then((response) => response.data.secure_url);
-            });
-
+             await axios.post('http://localhost:5001/subir', formData)
+            
+             let url2 = cloudinaryUploadPromises.data;
 
         
 
@@ -43,8 +42,7 @@ const CrearPago = () => {
             var latitud = response.data[0].lat;
             var longitud = response.data[0].lon;
 
-             Promise.all(cloudinaryUploadPromises)
-                .then(async (imagenes) => {
+                    console.log(imagenes);
                     var url = "http://localhost:5001/gastos";
                     var respuesta = await axios.post(url, {
                         concepto: concepto,
@@ -55,13 +53,12 @@ const CrearPago = () => {
                         token: localStorage.getItem("token"),
                         lat: latitud,
                         lon: longitud,
-                        // imagenes: imagenes
+                        imagenes: url2
 
                     });
                     alert("Evento creado");
                     window.location.href = "http://localhost:3000/";
                 })
-         })
     }
     return (
         <div>
