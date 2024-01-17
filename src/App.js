@@ -24,7 +24,7 @@ function App() {
   const [coordenadas, setCoordenadas] = useState([36.719091, -4.416206]);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/gastos/gasto/desc')
+    axios.get('https://back-examen-web.vercel.app/gastos/gasto/desc')
       .then(res => {
         setData(res.data);
         const markers = res.data.map((parada) => (
@@ -39,7 +39,7 @@ function App() {
 
   const eliminarItem = (id) => {
     return () => {
-      axios.delete('http://localhost:5001/gastos/' + id)
+      axios.delete('https://back-examen-web.vercel.app/gastos/' + id)
         .then(res => {
           console.log(res.data);
           window.location.reload();

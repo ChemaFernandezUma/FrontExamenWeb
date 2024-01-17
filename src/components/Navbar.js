@@ -16,7 +16,7 @@ const Navbar = () => {
         localStorage.setItem("cargado", true);
         localStorage.setItem("tokenId", userObject.jti);
         console.log(userObject);
-        // var url = "http://localhost:5001/logs";
+        // var url = "https://back-examen-web.vercel.app/logs";
         // var respuesta = await axios.post(url, {
         //     usuario: userObject.email,
         //     timestamp: new Date().toISOString(),
@@ -48,7 +48,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const getSaldo = async () => {
-            var url = "http://localhost:5001/gastos/saldo/" + localStorage.getItem("email");
+            var url = "https://back-examen-web.vercel.app/gastos/saldo/" + localStorage.getItem("email");
             var respuesta = await axios.get(url).then(res => {
                 console.log(res.data);
                 setSaldo(res.data);
